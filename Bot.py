@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
 import json, os
-
+from dotenv import load_dotenv
 with open('setting.json', 'r', encoding='utf8') as settingFile:
     settingData = json.load(settingFile)
 
+# load env
+load_dotenv()
 
 bot = commands.Bot(command_prefix = 'yo!')
 
@@ -44,4 +46,4 @@ for Filename in os.listdir('./cmds'):
         bot.load_extension(f'cmds.{Filename[:-3]}')
 
 if __name__ == "__main__":
-    bot.run(settingData['TOKEN'])
+    bot.run(os.getenv("TOKEN"))
